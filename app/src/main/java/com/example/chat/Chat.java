@@ -42,7 +42,16 @@ public class Chat extends Activity{
   //  }
 
     public void send(View view){
-        button.setText(name);
+//        button.setText(name);
+
     }
 
+    public void ss() {
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
+    }
 }

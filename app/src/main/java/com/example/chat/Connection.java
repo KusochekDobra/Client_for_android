@@ -38,8 +38,7 @@ public class Connection implements Runnable{
     }
 
     private void showMessage(String string) {
-        textView.append(string);
-
+        System.out.println(string);
     }
 
     public void close() {
