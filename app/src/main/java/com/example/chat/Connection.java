@@ -1,5 +1,6 @@
 package com.example.chat;
 
+import android.app.Activity;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -8,24 +9,17 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class Connection implements Runnable{
+
     private Socket socket;
-    private final String ip;
-    private final int PORT;
+
     private boolean enough;
 
     private volatile static String userName;
 
     public TextView textView;
 
-    public Connection(String ip, int PORT){
-        this.ip = ip;
-        this.PORT = PORT;
-        enough = false;
-        try {
-            socket = new Socket(ip, PORT);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Connection(Socket socket){
+        this.socket = socket;
     }
 
     @Override
@@ -37,19 +31,15 @@ public class Connection implements Runnable{
                 String string = new String(buffer, 0, bc);
 
                 showMessage(string);
-                // objectOutputStream.writeObject("Privet");
-                //JOptionPane.showMessageDialog(null, (String) objectInputStream.readObject());
-
-                //   }
-
             }
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
     }
 
     private void showMessage(String string) {
-       textView.append(string);
+        textView.append(string);
+
     }
 
     public void close() {
@@ -64,13 +54,13 @@ public class Connection implements Runnable{
 
     public void send(){
         /**
-        String s = chatController.getMessageOut();
+         String s = chatController.getMessageOut();
 
-        try {
-            socket.getOutputStream().write((userName + ": " + s).getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+         try {
+         socket.getOutputStream().write((userName + ": " + s).getBytes());
+         } catch (IOException e) {
+         e.printStackTrace();
+         }
          */
     }
 

@@ -7,22 +7,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.net.Socket;
+
 
 public class Chat extends Activity{
     private Connection connection;
     public Button button;
-    private String address;
     private String name;
 
     Thread threadForConnection;
 
+    public static Socket socket;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
-        address = intent.getStringExtra("ip");
-        name = intent.getStringExtra("name");
 
-        connection = new Connection(address, 9999);
+        connection = new Connection(socket);
 
         connection.setUserName(name);
         super.onCreate(savedInstanceState);
@@ -33,8 +34,6 @@ public class Chat extends Activity{
         threadForConnection = new Thread(connection);
         threadForConnection.start();
 
-
-        button = (Button) findViewById(R.id.send);
     }
 
     //@Override
