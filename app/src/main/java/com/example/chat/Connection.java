@@ -1,6 +1,7 @@
 package com.example.chat;
 
 import android.app.Activity;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -10,11 +11,15 @@ import java.net.Socket;
 
 public class Connection implements Runnable{
 
+    private Activity activity;
+
+    private EditText message;
+
     private Socket socket;
 
     private boolean enough;
 
-    private volatile static String userName;
+    private String userName;
 
     public TextView textView;
 
@@ -37,8 +42,23 @@ public class Connection implements Runnable{
         }
     }
 
-    private void showMessage(String string) {
-        System.out.println(string);
+    /**
+     * ЗДЕСЬ
+     */
+    private void showMessage(final String string) {
+
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                textView.append(string + "\n");
+            }
+        });
+//        System.out.println(string);
+        /**ЗДЕСЬ Нужно
+         *
+         * textView.append(string)
+         *
+         * */
     }
 
     public void close() {
@@ -51,16 +71,16 @@ public class Connection implements Runnable{
         }
     }
 
-    public void send(){
-        /**
-         String s = chatController.getMessageOut();
+    public void send() {
+
+        String s = new String(message.getText().toString());
 
          try {
          socket.getOutputStream().write((userName + ": " + s).getBytes());
          } catch (IOException e) {
          e.printStackTrace();
          }
-         */
+        message.setText("");
     }
 
     public void setUserName(String userName) {
@@ -71,5 +91,11 @@ public class Connection implements Runnable{
         this.textView = textView;
     }
 
+    public void setActivity(Activity activity) {
+        this.activity = activity;
+    }
 
+    public void setMessage(EditText message) {
+        this.message = message;
+    }
 }

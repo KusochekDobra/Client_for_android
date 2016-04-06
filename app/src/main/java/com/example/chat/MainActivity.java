@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Void... params) {
 
-            if(ipIsCorrect(ipAddress) && !name.equals("-1")) {
+            if (ipIsCorrect(ipAddress) && !name.equals("")) {
                 return true;
             }
           return false;
@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
             if (aVoid){
 
                 Intent intent = new Intent(MainActivity.this, Chat.class);
-                intent.putExtra("ip", ipAddress);
                 intent.putExtra("name", name);
                 Chat.socket = socket;
 

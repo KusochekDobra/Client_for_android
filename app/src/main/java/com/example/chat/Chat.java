@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.net.Socket;
@@ -15,6 +16,7 @@ public class Chat extends Activity{
     public Button button;
     private String name;
 
+
     Thread threadForConnection;
 
     public static Socket socket;
@@ -22,15 +24,15 @@ public class Chat extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
-
+        name = intent.getStringExtra("name");
         connection = new Connection(socket);
 
         connection.setUserName(name);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat);
-
+        connection.setMessage((EditText) findViewById(R.id.message));
         connection.setTextView((TextView) findViewById(R.id.view_window));
-
+        connection.setActivity(this);
         threadForConnection = new Thread(connection);
         threadForConnection.start();
 
@@ -42,16 +44,7 @@ public class Chat extends Activity{
   //  }
 
     public void send(View view){
-//        button.setText(name);
+        connection.send();
 
-    }
-
-    public void ss() {
-        this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        });
     }
 }

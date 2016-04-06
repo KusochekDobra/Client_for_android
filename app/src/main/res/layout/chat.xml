@@ -3,23 +3,44 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Send"
-        android:id="@+id/send"
-        android:layout_row="0"
-        android:layout_column="5"
-        android:clickable="true"
-        android:onClick="send"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="46dp" />
-
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:text=""
         android:id="@+id/view_window" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true">
+
+        <EditText
+            android:layout_width="281dp"
+            android:layout_height="match_parent"
+            android:id="@+id/message"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_weight="0.63" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Send"
+            android:id="@+id/send"
+            android:layout_row="0"
+            android:layout_column="5"
+            android:clickable="true"
+            android:onClick="send"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="0dp"
+            android:layout_weight="0" />
+
+    </LinearLayout>
 
 </RelativeLayout>
